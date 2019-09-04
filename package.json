@@ -13,13 +13,15 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "prewatch": "del-cli dist -f",
     "precommit-msg": "echo 'Pre-commit build...' && exit 0",
-    "postcommit": "git add . && git commit -am 'Auto-build' && exit 0"
+    "postcommit": "git add . && git commit -am 'Auto-build' && exit 0",
+    "runprod":  "npm run prod  && exit 0"
   },
   "pre-commit": [
     "precommit-msg",
     "prod"
   ],
-  "post-commit": [
+  "pre-push": [
+    "runprod",
     "postcommit"
   ],
   "keywords": [
@@ -61,7 +63,6 @@
     "laravel-mix-imagemin": "^1.0.3",
     "post-commit": "0.0.1",
     "pre-commit": "^1.2.2",
-    "pre-push": "^0.1.1",
     "vue-template-compiler": "^2.6.10",
     "wp-pot": "^1.7.2"
   }
