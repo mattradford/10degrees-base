@@ -16,10 +16,6 @@
     "postcommit": "git add . && git commit -am 'Auto-build' && exit 0",
     "runprod":  "npm run prod  && exit 0"
   },
-  "pre-commit": [
-    "precommit-msg",
-    "prod"
-  ],
   "pre-push": [
     "runprod",
     "postcommit"
