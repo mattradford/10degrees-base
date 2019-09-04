@@ -3,7 +3,7 @@ require("laravel-mix-versionhash");
 require("laravel-mix-copy-watched");
 require("laravel-mix-imagemin");
 require("laravel-mix-polyfill");
-
+let { CleanWebpackPlugin } = require("clean-webpack-plugin");
 let wpPot = require("wp-pot");
 
 /*
@@ -19,31 +19,45 @@ let wpPot = require("wp-pot");
  */
 
 mix
-  .setPublicPath("dist")
-  .js("src/js/src/main.js", "dist/js")
-  .sass("src/scss/main.scss", "dist/css")
-  .sass("src/scss/wp-admin.scss", "dist/css")
-  .sass("src/scss/wp-editor.scss", "dist/css")
-  .sass("src/scss/wp-login.scss", "dist/css")
+  .setPublicPath("dist/")
+  .imagemin("img/**.*", {
+    context: "src"
+  })
+  .js("src/js/src/main.js", "js")
+  .sass("src/scss/main.scss", "css")
+  .sass("src/scss/wp-admin.scss", "css")
+  .sass("src/scss/wp-editor.scss", "css")
+  .sass("src/scss/wp-login.scss", "css")
   .options({
     processCssUrls: false,
     postCss: [require("postcss-css-variables")()]
   })
   .sourceMaps()
-  .versionHash({
-    delimiter: "-"
-  })
-  .imagemin("img/**.*", {
-    context: "src"
-  })
   .copyWatched("src/fonts", "dist/fonts")
   .polyfill({
     enabled: true,
     targets: false
+  })
+  .webpackConfig({
+    plugins: [
+      new CleanWebpackPlugin({
+        verbose: true,
+        // dry: true,
+        // cleanStaleWebpackAssets: false,
+        // protectWebpackAssets: false,
+        cleanOnceBeforeBuildPatterns: ["**/*.css", "**/*.js", "!img/*"]
+      })
+    ],
+    watchOptions: {
+      ignored: /node_modules/
+    }
+  })
+  .versionHash({
+    delimiter: "-"
   });
 
-wpPot({
-  destFile: "lang/@textdomain.pot",
-  domain: "@textdomain",
-  package: "@theme"
-});
+// wpPot({
+//   destFile: "lang/@textdomain.pot",
+//   domain: "@textdomain",
+//   package: "@theme"
+// });

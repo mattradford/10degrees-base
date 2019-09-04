@@ -4,13 +4,13 @@
 $old-ie: false !default;
 
 // // Mixins
-@import "mixins/_mixins";
+// @import "mixins/_mixins";
 
 // // Common
 // @import "common/_variables";
-@import "common/_global";
+// @import "common/_global";
 
 // // 10° components
 @import "components/_banner";
 @import "components/_breadcrumbs";
-@import "components/_footer";
+// @import "components/_footer";
