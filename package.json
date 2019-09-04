@@ -12,9 +12,16 @@
     "prod": "npm run prewatch && npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "prewatch": "del-cli dist -f",
-    "precommit-msg": "echo 'Pre-commit build...' && exit 0"
+    "precommit-msg": "echo 'Pre-commit build...' && exit 0",
+    "postcommit": "ga . && git commit -am 'Auto-build' && exit 0"
   },
-  "pre-commit": [ "precommit-msg", "prod" ],
+  "pre-commit": [
+    "precommit-msg",
+    "prod"
+  ],
+  "post-commit": [
+    "postcommit"
+  ],
   "keywords": [
     "wordpress",
     "wordpress-theme"
@@ -52,6 +59,7 @@
     "imagemin-webpack-plugin": "^2.4.2",
     "laravel-mix-copy-watched": "^2.1.4",
     "laravel-mix-imagemin": "^1.0.3",
+    "post-commit": "0.0.1",
     "pre-commit": "^1.2.2",
     "vue-template-compiler": "^2.6.10",
     "wp-pot": "^1.7.2"
