@@ -61,6 +61,7 @@
     "laravel-mix-imagemin": "^1.0.3",
     "post-commit": "0.0.1",
     "pre-commit": "^1.2.2",
+    "pre-push": "^0.1.1",
     "vue-template-compiler": "^2.6.10",
     "wp-pot": "^1.7.2"
   }
